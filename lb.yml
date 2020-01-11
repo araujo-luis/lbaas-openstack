@@ -1,0 +1,8 @@
+#cloud-config
+repo_update: true
+packages:
+- tomcat8
+runcmd:
+- [ sh, -c, 'mkdir /var/lib/tomcat8/webapps/id' ]
+- [ sh, -c, 'echo "<html><body>Respuesta desde el nodo 2</body></html>" > /var/lib/tomcat8/webapps/id/index.html' ]
+- [ sh, -c, 'sudo /sbin/iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080' ]
